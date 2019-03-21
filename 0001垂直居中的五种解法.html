@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>不知宽高，垂直居中的五种解法</title>
+
+        <style type="text/css">
+            #parent {
+                width: 600px;
+                height: 400px;
+                background-color: #fba;
+                margin: 100px auto;
+            }
+            #child {
+                width: 400px;
+                height: 200px;
+                background-color: #bfa;
+            }
+
+
+            /* 解法一 */
+            /*
+            #parent {
+                position: relative;
+            }
+            #child {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            } */
+            /*
+            通过设置子元素到父元素的四边距离都为0，加上margin的自适应，达到效果，
+
+                1.如果四边距都设为0，margin不设置，那么子元素位于左上角。
+                2.如果margin设置为auto，right不设置，其他三边距为0，则子元素紧贴左边。
+
+            注：必须开启子元素绝对定位以及父元素的相对定位
+                 top  设置定位元素的上外边距边界与其包含块上边界之间的偏移。
+             */
+
+
+            /* 解法二 */
+            /*
+            #parent {
+                position: relative;
+            }
+            #child {
+                position: absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+            } */
+            /*
+            top left设置为50%，这里盒模型里的position能看到，
+            left300，top200，是父元素的50%。
+            观察子元素的左上角，相当于把左上角移动到了父元素的中心
+
+            transform:translate(-50%,-50%)，是移动自身的位置，
+            让元素向左移动自身长度的50%，向上移动自身高度的50%。
+            观察元素的左上角，相当于在上一个位置的基础上，
+            再向左上方移动了二分之一个自身大小，父元素中心与子元素中心重合。
+
+            注意：盒模型里的position，没变依然是left300，top200 */
+
+
+            /* 解法三 */
+            /*
+            #parent {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+            #child {
+                display: inline-table;
+            } */
+            /*
+            组合使用 display:table-cell; (实测只能用table-cell，其他的不行)
+                    vertical-align: middle; (top、sub、super都是顶端，bottom底端不能对齐)
+                    text-align: center;
+                使父元素内的所有行内元素水平垂直居中
+            子元素设置display:inline-block; (inline-table也行)
+             */
+
+
+            /* 解法四 */
+            /*
+            #parent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            } */
+            /*
+            Flex是Flexible Box的缩写，意为"弹性布局"。
+            display:flex 是一种布局方式。它即可以应用于容器中，也可以应用于行内元素。
+            设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+            align-items: center; 使元素水平居中。
+            justify-content: center; 使元素垂直居中。
+            移动端首选 */
+
+
+            /* 解法五 */
+
+            #parent {
+                display: flex;
+            }
+            #child {
+                margin: auto;
+            }
+            /* 弹性盒子+外边距auto，把子元素挤到父元素中间位置 */
+
+
+
+
+        </style>
+    </head>
+
+    <body>
+        <div id="parent">
+            <div id="child"></div>
+        </div>
+    </body>
+</html>
