@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JS能力测评</title>
+		<script type="text/javascript">
+
+			// 测试地址 https://www.nowcoder.com/ta/js-assessment
+			// 整理by DiracKeeko
+
+			/**
+			 *  001 如果数组中存在 item，则返回元素在数组中的位置，否则返回 -1
+			 *
+			 * 示例：
+			 *  输入：[ 1, 2, 3, 4 ], 3
+			 *  输出：2
+			 */
+			function indexOf(arr, item) {
+
+ 				for(var i = 0; i < arr.length; i++){
+					if(arr[i] == item){
+						return i;
+					}
+				}
+				return -1;
+ 			}
+			//console.log(indexOf([ 1, 2, 3, 4 ], 4));
+
+			/**
+			 *  002 计算给定数组 arr 中所有元素的总和
+			 *		数组中的元素均为 Number 类型
+			 * 示例：
+			 *  输入：[ 1, 2, 3, 4 ]
+			 *  输出：10
+			 */
+			function sum(arr) {
+				var sum = 0;
+				for(var i = 0; i < arr.length; i++){
+					sum = sum + arr[i];
+				}
+				return sum;
+ 			}
+			// console.log(sum([ 1, 2, 66, 6 ]));
+
+			/**
+			 *  003 移除数组 arr 中的所有值与 item 相等的元素。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4, 2], 2
+			 *  输出：[1, 3, 4]
+			 */
+			function remove(arr, item) {
+
+				// var arr2 = arr;
+				// 第一次用上面代码，定义arr2。这种方法会导致arr2改变的同时，改变arr1 (测试不通过)
+				// 这是因为数组是引用数据类型(指针指向堆内存)，所以用下面的代码复制一个arr2
+				// 若不明白，可以用 return arr2; 上面的console.log(arr);输出测试。
+				// 结果就通过了  (题目有隐藏测试项目arr是否改变)
+
+				var arr2 = [];
+				for(var i = 0; i < arr.length; i++){
+					arr2.push(arr[i]);
+				}
+
+				for(var i = 0; i < arr2.length; i++){
+					if(arr2[i] == item){
+						arr2.splice(i, 1);
+						i--;
+					}
+				}
+				// console.log(arr);
+				return arr2;
+ 			}
+			// console.log(remove([1, 2, 3, 3, 4, 2, 2], 2));
+
+			/**
+			 *  004 移除数组 arr 中的所有值与 item 相等的元素，
+			 *  	直接在给定的 arr 数组上进行操作，并将结果返回
+			 * 示例：
+			 *  输入：[1, 2, 2, 3, 4, 2, 2], 2
+			 *  输出：[1, 3, 4]
+			 */
+			function removeWithoutCopy(arr, item) {
+				for(var i = 0; i < arr.length; i++){
+					if(arr[i] == item){
+						arr.splice(i, 1);
+						i--;
+					}
+				}
+				return arr;
+ 			}
+			// console.log(removeWithoutCopy([1, 2, 2, 3, 4, 2, 2], 2));
+
+			/**
+			 *  005 在数组 arr 末尾添加元素 item。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4],  10
+			 *  输出：[1, 2, 3, 4, 10]
+			 */
+			function append(arr, item) {
+				var arr2 = [];
+				for(var i = 0; i < arr.length; i++){
+					arr2.push(arr[i]);
+				}
+				arr2.push(item);
+				return arr2;
+ 			}
+			// console.log(append([1, 2, 3, 4], 10));
+
+			/**
+			 *  006 删除数组 arr 最后一个元素。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4]
+			 *  输出：[1, 2, 3]
+			 */
+			function truncate(arr) {
+				var arr2 = [];
+				for(var i = 0; i < arr.length - 1; i++){
+					arr2.push(arr[i]);
+				}
+				return arr2;
+ 			}
+			// console.log(truncate([1, 2, 3, 4]));
+
+			/**
+			 *  007 在数组 arr 开头添加元素 item。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4], 10
+			 *  输出：[10, 1, 2, 3, 4]
+			 */
+			function prepend(arr, item) {
+				var arr2 = [];
+				for(var i = 0; i < arr.length; i++){
+					arr2.push(arr[i]);
+				}
+				arr2.unshift(item);
+				return arr2;
+ 			}
+			// console.log(prepend([1, 2, 3, 4], 10));
+
+			/**
+			 *  008 删除数组 arr 第一个元素。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4]
+			 *  输出：[2, 3, 4]
+			 */
+			function curtail(arr) {
+				var arr2 = [];
+				for(var i = 0; i < arr.length; i++){
+					arr2.push(arr[i]);
+				}
+				arr2.shift(arr2[0]);
+				return arr2;
+ 			}
+			// console.log(curtail([1, 2, 3, 4]));
+
+			/**
+			 *  009 合并数组 arr1 和数组 arr2。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4], ['a', 'b', 'c', 1]
+			 *  输出：[1, 2, 3, 4, 'a', 'b', 'c', 1]
+			 */
+			function concat(arr1, arr2) {
+				var arr3 = arr1.concat(arr2);
+				return arr3;
+ 			}
+			// console.log(concat([1, 2, 3, 4], ['a', 'b', 'c', 1]));
+
+			/**
+			 *  010 在数组 arr 的 index 处添加元素 item。
+			 *  	不要直接修改数组 arr，结果返回新的数组
+			 * 示例：
+			 *  输入：[1, 2, 3, 4], 'z', 2
+			 *  输出：[1, 2, 'z', 3, 4]
+			 */
+			function insert(arr, item, index) {
+				var arr2 = arr.slice(0);
+				arr2.splice(index, 0, item);
+				return arr2;
+ 			}
+			console.log(insert([1, 2, 3, 4], 'z', 2));
+
+		</script>
+
+	</head>
+	<body>
+
+	</body>
+</html>
