@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JS能力测评</title>
+		<script type="text/javascript">
+
+			// 测试地址 https://www.nowcoder.com/ta/js-assessment
+			// 整理by DiracKeeko
+
+			/**
+			 *  021 将数组 arr 中的元素作为调用函数 fn 的参数
+			 *
+			 * 示例：
+			 *  输入：function (greeting, name, punctuation) {return greeting + ', ' + name + (punctuation || '!');}, ['Hello', 'Ellie', '!']
+			 *  输出：Hello, Ellie!
+			 */
+			function argsAsArray(fn, arr) {
+				// return fn.apply(fn, arr);
+				return fn.apply(this, arr);
+				// 实测这里写 return fn.apply(8, arr);也能通过，(8可以换成任意数字，布尔值不可以)
+				// apply里面传入的对象不重要，
+				// 因为传入的function中没有this相关的调用(只有变量的使用，没有this属性)
+			}
+			// console.log(argsAsArray(function (greeting, name, punctuation) {return greeting + ', ' + name + (punctuation || '!');}, ['Hello', 'Ellie', '!']));
+
+			/**
+			 *  022 将函数 fn 的执行上下文改为 obj 对象
+			 *
+			 * 示例：
+			 *  输入：function () {return this.greeting + ', ' + this.name + '!!!';}, {greeting: 'Hello', name: 'Rebecca'}
+			 *  输出：Hello, Rebecca!!!
+			 */
+			function speak(fn, obj) {
+				return fn.apply(obj);
+				// return fn.call(obj); 也可以
+			}
+			// console.log(speak(function () {return this.greeting + ', ' + this.name + '!!!';}, {greeting: 'Hello', name: 'Rebecca'}));
+
+
+			/**
+			 *  023 实现函数 functionFunction，调用之后满足如下条件：
+			 *  	1、返回值为一个函数 f
+					2、调用返回的函数 f，返回值为按照调用顺序的参数拼接，拼接字符为英文逗号加一个空格，即 ', '
+					3、所有函数的参数数量为 1，且均为 String 类型
+			 * 示例：
+			 *  输入：functionFunction('Hello')('world')
+			 *  输出：Hello, world
+			 */
+			// 理解示例中输入的过程，先执行 functionFunction('Hello')，其返回值是一个函数f
+			// 而后 f('world')，返回值是输出结果 Hello, world
+			function functionFunction(str) {
+				function f(str2) {
+					return str + ", " + str2;
+				}
+				return f;
+ 			}
+			// console.log(functionFunction('Hello')('world'));
+
+			/**
+			 *  024 实现函数 makeClosures，调用之后满足如下条件：
+			 *		1、返回一个函数数组 result，长度与 arr 相同
+					2、运行 result 中第 i 个函数，即 result[i]()，结果与 fn(arr[i]) 相同
+			 * 示例：
+			 *  输入：  [1, 2, 3], function (x) {
+							return x * x;
+						}
+					调用方式 makeClosures(arr, function(){})[index]()
+					先执行 makeClosures(arr, function(){}) 得到返回的result函数数组。
+					再执行 result函数数组里面对应索引的函数。
+			 *  输出：4
+			 */
+			// function makeClosures(arr, fn) {
+			// 	var result = [];
+			// 	//ES6用let就可以解决
+			// 	for(let i = 0; i < arr.length; i++){
+			// 		result.push(
+			// 			function(){
+			// 				return fn(arr[i]);
+			// 			}
+			// 		)
+			// 	}
+			// 	return result;
+ 			// }
+
+			function makeClosures(arr, fn) {
+				var result = [];
+				for(var i = 0; i < arr.length; i++){
+					result.push(
+						// 存入立即执行函数
+						(function(num){
+							return function(){
+								return fn(arr[num]);
+							}
+						})(i)
+						//其中立即执行函数的参数是 i ，num接收这个参数。
+					);
+				}
+				return result;
+ 			}
+			// console.log(makeClosures([1, 2, 3], function (x) {
+			// 			   return x * x;
+			// 		   })[0]());
+
+
+			/**
+			 *  025 已知函数 fn 执行需要 3 个参数。请实现函数 partial，调用之后满足如下条件：
+			 *		1、返回一个函数 result，该函数接受一个参数
+					2、执行 result(str3) ，返回的结果与 fn(str1, str2, str3) 一致
+			 */
+
+			function partial(fn, str1, str2) {
+			    function result(str3) {
+			        return fn(str1, str2, str3);
+			    }
+				return result;
+			}
+			/*
+			// 也直接返回匿名函数
+			function partial(fn, str1, str2) {
+			    return function(str3) {
+			        return fn(str1, str2, str3);
+			    }
+			}
+			// 也可以用函数的方法call()来调用
+			function partial(fn, str1, str2) {
+				// call和apply必须显式地调用str3，立即执行
+				function result(str3) {
+			        return fn.call(this, str1, str2, str3);
+			    }
+				return result;
+			}
+			*/
+
+
+			/**
+			 *  026 函数 useArguments 可以接收 1 个及以上的参数。
+			 *  请实现函数 useArguments，返回所有调用参数相加后的结果。
+			 *  本题的测试参数全部为 Number 类型，不需考虑参数转换。
+			 *
+			 * 示例：
+			 *  输入：1, 2, 3, 4
+			 *  输出：10
+			 */
+			function useArguments() {
+				var sum = 0;
+				for(var i = 0; i < arguments.length; i++){
+					sum = sum + arguments[i];
+				}
+				return sum;
+			}
+			// console.log(useArguments(1, 2, 3, 4));
+
+
+			/**
+			 *  027 实现函数 callIt，调用之后满足如下条件
+			 *  	1、返回的结果为调用 fn 之后的结果
+					2、fn 的调用参数为 callIt 的第一个参数之后的全部参数
+			 * 示例：
+			 *  输入：无
+			 *  输出：无
+			 */
+			function callIt(fn) {
+				var arr = [];
+				for(var i = 1; i < arguments.length; i++){
+					arr.push(arguments[i]);
+				}
+				var result = fn.apply(this, arr);
+				return result;
+			}
+			// 因为arguments并非真正的数组，
+			// 因此要获得callIt的第一个参数之后的所有参数，不能直接使用slice方法截取
+
+
+			/**
+			 *  028 实现函数 partialUsingArguments，调用之后满足如下条件：
+			 *      1、返回一个函数 result
+					2、调用 result 之后，返回的结果与调用函数 fn 的结果一致
+					3、fn 的调用参数为 partialUsingArguments 的第一个参数之后的全部参数以及 result 的调用参数
+			 *
+			 */
+			function partialUsingArguments(fn) {
+				var arr = [];
+				for(var i = 1; i < arguments.length; i++){
+					arr.push(arguments[i]);
+				}
+				function result(){
+					var arr2 = [];
+					for(var j = 0; j < arguments.length; j++){
+						arr2.push(arguments[j]);
+					}
+					var arr3 = arr.concat(arr2);
+					return fn.apply(this, arr3)
+				}
+				return result;
+			}
+			// 关键点在于 partialUsingArguments()函数的arguments，
+			// 以及result()的arguments都要先转化为数组，再进行拼接，把参数统一放置于一个数组中
+			// function.apply(obj,array)  用apply调用函数时，只能接收两个参数
+
+
+			/** 柯里化
+			 *  029 已知 fn 为一个预定义函数，实现函数 curryIt，调用之后满足如下条件：
+			 *  	1、返回一个函数 a，a 的 length 属性值为 1（即显式声明 函数a只接收一个参数）
+					2、调用 a 之后，返回一个函数 b, b 的 length 属性值为 1
+					3、调用 b 之后，返回一个函数 c, c 的 length 属性值为 1
+					4、调用 c 之后，返回的结果与调用 fn 的返回值一致
+					5、fn 的参数依次为函数 a, b, c 的调用参数
+			 *
+			 * 示例：
+			 *  输入：var fn = function (a, b, c) {return a + b + c}; curryIt(fn)(1)(2)(3);
+			 *  输出：6
+			 */
+			function curryIt(fn) {
+			    return function a(xa) {
+			        return function b(xb) {
+			            return function c(xc) {
+			                return fn.call(this,xa,xb,xc);
+			            };
+			        };
+			    };
+			}
+			var fn = function (a, b, c) {return a + b + c};
+			// console.log(curryIt(fn)(1)(2)(3));
+			/*
+				柯里化 是指，把接受多个参数的函数，
+				变换成接受一个单一参数(最初函数的第一个参数)的函数，
+				同时返回 接受余下参数并且返回结果的新函数 的技术。
+			 */
+			// 下面的代码 依次输出 a b c的函数体。
+			// console.log(curryIt(fn);
+			// console.log(curryIt(fn)(1));
+			// console.log(curryIt(fn)(1)(2);
+
+
+			/**
+			 *  030 返回参数 a 和 b 的逻辑或运算结果
+			 *
+			 * 示例：
+			 *  输入：false, true
+			 *  输出：true
+			 */
+			function or(a, b) {
+				return a || b;
+ 			}
+			// console.log(or(false, true));
+
+
+		</script>
+
+	</head>
+	<body>
+
+	</body>
+</html>
