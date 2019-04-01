@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JS能力测评</title>
+		<script type="text/javascript">
+
+			// 测试地址 https://www.nowcoder.com/ta/js-assessment
+			// 整理by DiracKeeko
+
+			/**
+			 *  031 返回参数 a 和 b 的逻辑且运算结果
+			 *
+			 * 示例：
+			 *  输入：false, true
+			 *  输出：false
+			 */
+			function and(a, b) {
+
+			}
+			// console.log(and(false, true));
+
+			/**
+			 *  032 完成函数 createModule，调用之后满足如下要求：
+			 *  	1、返回一个对象
+					2、对象的 greeting 属性值等于 str1， name 属性值等于 str2
+					3、对象存在一个 sayIt 方法，该方法返回的字符串为 greeting属性值 + ', ' + name属性值
+			 *
+			 */
+			function createModule(str1, str2) {
+
+			}
+			// console.log(createModule("mi", "haha"));
+			// console.log(createModule("mi", "haha").sayIt());
+
+
+			/** 二进制转换
+			 *  033 获取数字 num 二进制形式第 bit 位的值。注意：
+			 *  	1、bit 从 1 开始
+					2、返回 0 或 1
+					3、举例：2 的二进制为 10，第 1 位为 0，第 2 位为 1
+			 * 示例：
+			 *  输入：128, 8
+			 *  输出：1
+			 */
+			function valueAtBit(num, bit) {
+
+ 			}
+			// console.log(valueAtBit(128, 8));
+
+			/**
+			 *  034 给定二进制字符串，将其换算成对应的十进制数字
+			 *
+			 * 示例：
+			 *  输入：'11000000'
+			 *  输出：192
+			 */
+			function base10(str) {
+
+ 			}
+			// console.log(base10('11000000'));
+
+
+			/**
+			 *  035 将给定数字转换成二进制字符串。
+			 *  	如果字符串长度不足 8 位，则在前面补 0 到满8位。
+			 *
+			 * 示例：
+			 *  输入：65
+			 *  输出：01000001
+			 */
+
+			function convertToBinary(num) {
+
+			}
+			// console.log(convertToBinary(65));
+
+
+			/**
+			 *  036 求 a 和 b 相乘的值，
+			 *  a 和 b 可能是小数，需要注意结果的精度问题
+			 *
+			 * 示例：
+			 *  输入：3, 0.0001
+			 *  输出：0.0003
+			 */
+			function multiply(a, b) {
+
+			}
+			// console.log(multiply(3, 0.0001));
+
+
+			/**
+			 *  037 将函数 fn 的执行上下文改为 obj，返回 fn 执行后的值
+			 *
+			 * 示例：
+			 *  输入：alterContext(function() {return this.greeting + ', ' + this.name + '!'; }, {name: 'Rebecca', greeting: 'Yo' })
+			 *  输出：Yo, Rebecca!
+			 */
+			function alterContext(fn, obj) {
+
+			}
+			// console.log(alterContext(function(){return this.greeting + ', ' + this.name + '!'; }, {name: 'Rebecca', greeting: 'Yo' }));
+
+
+			/**
+			 *  038 给定一个构造函数 constructor，
+			 *  请完成 alterObjects 方法，
+			 *  将 constructor 的所有实例的 greeting 属性指向给定的 greeting 变量。
+			 *
+			 * 示例：
+			 *  输入：var C = function(name) {this.name = name; return this;};
+					 var obj1 = new C('Rebecca');
+					 alterObjects(C, 'What\'s up'); obj1.greeting;
+			 *  输出：What's up
+			 */
+			function alterObjects(constructor, greeting) {
+
+			}
+			// var C = function(name) {this.name = name; return this;};
+			// var obj1 = new C('Rebecca');
+			// alterObjects(C, 'What\'s up');
+			// console.log(obj1.greeting);
+
+
+			/**
+			 *  039 找出对象 obj 不在原型链上的属性
+			 *  (注意这题测试例子的冒号后面也有一个空格~)
+			 *  	1、返回数组，格式为 key: value
+					2、结果数组不要求顺序
+			 *
+			 * 示例：
+			 *  输入：var C = function() {this.foo = 'bar'; this.baz = 'bim';};
+						C.prototype.bop = 'bip';
+						iterate(new C());
+			 *  输出：["foo: bar", "baz: bim"]
+			 */
+			function iterate(obj) {
+
+			}
+			// var C = function() {this.foo = 'bar'; this.baz = 'bim';};
+			// C.prototype.bop = 'bip';
+			// console.log(iterate(new C()));
+
+
+			/**
+			 *  040 给定字符串 str，检查其是否包含数字，包含返回 true，否则返回 false
+			 *
+			 * 示例：
+			 *  输入：'abc123'
+			 *  输出：true
+			 */
+			function containsNumber(str) {
+				
+ 			}
+			// console.log(containsNumber('abc123'));
+
+
+		</script>
+
+	</head>
+	<body>
+
+	</body>
+</html>
